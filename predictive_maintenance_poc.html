@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Predictive Maintenance Proof-of-Concept</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/keras"></script>
+</head>
+<body>
+  <h1>Predictive Maintenance Proof-of-Concept</h1>
+  <div>
+    <p>Input Vehicle Sensor Data:</p>
+    <form id="vehicle-sensor-data-form">
+      <label for="rpm">RPM:</label>
+      <input type="number" id="rpm" name="rpm" required><br>
+      <label for="temperature">Temperature (°C):</label>
+      <input type="number" id="temperature" name="temperature" required><br>
+      <label for="voltage">Voltage:</label>
+      <input type="number" id="voltage" name="voltage" required><br>
+      <button type="submit">Predict</button>
+    </form>
+  </div>
+  <div id="output"></div>
+  <script>
+    const model = tf.sequential();
+    model.add(tf.layers.dense({ units: 10, activation: 'relu', inputShape: [3] }));
+    model.add(tf.layers.dense({ units: 1, activation: 'sigmoid' }));
+    model.compile({ optimizer: 'adam', loss: 'binaryCrossentropy', metrics: ['accuracy'] });
+
+    const trainData = [
+      [0, 0, 0], [0, 1, 0], [1, 0, 0], [1, 1, 1],
+      [0, 0, 1], [0, 1, 1], [1, 0, 1], [1, 1, 0]
+    ];
+    const trainLabels = [0, 0, 0, 1, 1, 1, 0, 0];
+
+    model.fit(tf.tensor2d(trainData), tf.tensor2d(trainLabels, [8, 1]), { epochs: 100 }).then(() => {
+      document.getElementById('vehicle-sensor-data-form').addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const rpm = parseFloat(document.getElementById('rpm').value);
+        const temperature = parseFloat(document.getElementById('temperature').value);
+        const voltage = parseFloat(document.getElementById('voltage').value);
+        const prediction = await model.predict(tf.tensor2d([[rpm, temperature, voltage]])).data();
+        document.getElementById('output').textContent = `Prediction: ${prediction[0] > 0.5 ? 'Maintenance Needed' : 'No Maintenance Needed'}`;
+      });
+    });
+  </script>
+</body>
+</html>
