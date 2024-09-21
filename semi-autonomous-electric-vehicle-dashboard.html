@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard Interface for Semi-Autonomous Electric Vehicles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            width: 100%;
+            height: 100vh;
+            box-sizing: border-box;
+            background-color: #f5f5f5;
+        }
+        .vehicle-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 300px;
+            height: 400px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .vehicle-name {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .vehicle-status {
+            font-size: 18px;
+            font-weight: bold;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        .vehicle-info {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .vehicle-info-title {
+            font-size: 14px;
+            color: #6c757d;
+            font-weight: bold;
+        }
+        .vehicle-info-value {
+            font-size: 14px;
+            color: #333;
+        }
+        .vehicle-control {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 50px;
+            border-top: 1px solid #ddd;
+            border-radius: 0 0 5px 5px;
+            background-color: #f5f5f5;
+        }
+        .control-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100px;
+            height: 40px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="vehicle-card">
+            <div class="vehicle-name">Vehicle 1</div>
+            <div class="vehicle-status">Connected & Idle</div>
+            <div class="vehicle-info">
+                <div>
+                    <div class="vehicle-info-title">Battery level:</div>
+                    <div class="vehicle-info-value">89%</div>
+                </div>
+                <div>
+                    <div class="vehicle-info-title">Speed:</div>
+                    <div class="vehicle-info-value">0 km/h</div>
+                </div>
+                <div>
+                    <div class="vehicle-info-title">Location:</div>
+                    <div class="vehicle-info-value">New York, NY</div>
+                </div>
+            </div>
+            <div class="vehicle-control">
+                <button class="control-button">Go to point</button>
+            </div>
+        </div>
+        <div
